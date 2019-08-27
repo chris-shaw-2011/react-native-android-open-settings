@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
@@ -16,21 +18,23 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AndroidOpenSettings extends ReactContextBaseJavaModule {
+class AndroidOpenSettings extends ReactContextBaseJavaModule {
 
-    private List<Integer> usedRequestCodes = new ArrayList<>();
-    private ReactContext reactContext;
+    private final List<Integer> usedRequestCodes = new ArrayList<>();
+    private final ReactContext reactContext;
 
-    public AndroidOpenSettings(ReactApplicationContext reactContext) {
+    @SuppressWarnings("unused")
+    AndroidOpenSettings(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
     }
 
-    @Override
+    @Override @NonNull
     public String getName() {
         return "RNAndroidOpenSettings";
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void generalSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_SETTINGS);
@@ -38,13 +42,19 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void homeSettings(Promise promise) {
-        Intent intent = new Intent(Settings.ACTION_HOME_SETTINGS);
-
-        startActivity(intent, promise);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Intent intent = new Intent(Settings.ACTION_HOME_SETTINGS);
+            startActivity(intent, promise);
+        }
+        else {
+            promise.reject("1", "Android version not supported");
+        }
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void appDetailsSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
@@ -53,6 +63,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void wifiSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
@@ -60,6 +71,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void locationSourceSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -67,6 +79,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void wirelessSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
@@ -74,6 +87,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void airplaneModeSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
@@ -81,6 +95,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void apnSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_APN_SETTINGS);
@@ -88,6 +103,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void bluetoothSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
@@ -95,6 +111,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void dateSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_DATE_SETTINGS);
@@ -102,6 +119,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void localeSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
@@ -109,6 +127,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void inputMethodSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS);
@@ -116,6 +135,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void displaySettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
@@ -123,6 +143,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void securitySettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_SECURITY_SETTINGS);
@@ -130,6 +151,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void internalStorageSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_INTERNAL_STORAGE_SETTINGS);
@@ -137,6 +159,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void memoryCardSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_MEMORY_CARD_SETTINGS);
@@ -144,6 +167,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void accessibilitySettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
@@ -151,6 +175,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void applicationSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
@@ -158,6 +183,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void deviceInfoSettings(Promise promise) {
         Intent intent = new Intent(Settings.ACTION_DEVICE_INFO_SETTINGS);
@@ -165,6 +191,7 @@ public class AndroidOpenSettings extends ReactContextBaseJavaModule {
         startActivity(intent, promise);
     }
 
+    @SuppressWarnings("unused")
     @ReactMethod
     public void appNotificationSettings(Promise promise) {
         Intent intent = new Intent("android.settings.APP_NOTIFICATION_SETTINGS"); // Settings.ACTION_APP_NOTIFICATION_SETTINGS
