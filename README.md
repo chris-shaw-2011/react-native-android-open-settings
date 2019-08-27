@@ -1,60 +1,18 @@
-# react-native-android-open-settings
+# react-native-android-open-settings-async
 
-Open android settings from your react native app
+Open android settings from your react native app, this is a forked version of levelasquez/react-native-android-open-settings because that appears to be abandoned
 
 ## Install
 Using npm
 
 ```
-npm install react-native-android-open-settings --save
+npm install react-native-android-open-settings-async --save
 ```
 
 Using yarn
 ```
-yarn add react-native-android-open-settings
+yarn add react-native-android-open-settings-async
 ```
-
-### Automatic Install
-```
-react-native link react-native-android-open-settings
-```
-### Manual Install
-
-1. In `settings.gradle`, insert the following code:
-    ```gradle
-    include ':react-native-android-open-settings'
-    project(':react-native-android-open-settings').projectDir = new File(settingsDir, '../node_modules/react-native-android-open-settings/android')
-    ```
-
-2. In `build.gradle`, insert the following code:
-    ```gradle
-    dependencies {
-      ...
-      implementation project(':react-native-android-open-settings')
-    }
-    ...
-    ```
-3. Edit `MainApplication.java` to look like this
-
-    ```java
-    ...
-
-    import com.levelasquez.androidopensettings.AndroidOpenSettingsPackage; // <-- add this import
-
-    public class MainApplication extends Application implements ReactApplication {
-    ...
-
-    @Override
-    protected List<ReactPackage> getPackages() {
-        return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                ...
-                new AndroidOpenSettingsPackage() // <-- add this
-        );
-    }
-    ...
-}
-    ```
 
 ## Usage
 
@@ -63,62 +21,62 @@ react-native link react-native-android-open-settings
 import AndroidOpenSettings from 'react-native-android-open-settings'
 
 // Open general settings menu
-AndroidOpenSettings.generalSettings()
+await AndroidOpenSettings.generalSettings()
 
 // Open home screen settings menu
-AndroidOpenSettings.homeSettings()
+await AndroidOpenSettings.homeSettings()
 
 // Open app settings menu
-AndroidOpenSettings.appDetailsSettings()
+await AndroidOpenSettings.appDetailsSettings()
 
 // Open wifi settings menu
-AndroidOpenSettings.wifiSettings()
+await AndroidOpenSettings.wifiSettings()
 
 // Open location source settings menu
-AndroidOpenSettings.locationSourceSettings()
+await AndroidOpenSettings.locationSourceSettings()
 
 // Open wireless settings menu
-AndroidOpenSettings.wirelessSettings()
+await AndroidOpenSettings.wirelessSettings()
 
 // Open airplane mode settings menu
-AndroidOpenSettings.airplaneModeSettings()
+await AndroidOpenSettings.airplaneModeSettings()
 
 // Open apn settings menu
-AndroidOpenSettings.apnSettings()
+await AndroidOpenSettings.apnSettings()
 
 // Open bluetooth settings menu
-AndroidOpenSettings.bluetoothSettings()
+await AndroidOpenSettings.bluetoothSettings()
 
 // Open date settings menu
-AndroidOpenSettings.dateSettings()
+await AndroidOpenSettings.dateSettings()
 
 // Open locale settings menu
-AndroidOpenSettings.localeSettings()
+await AndroidOpenSettings.localeSettings()
 
 // Open input method settings menu
-AndroidOpenSettings.inputMethodSettings()
+await AndroidOpenSettings.inputMethodSettings()
 
 // Open display settings menu
-AndroidOpenSettings.displaySettings()
+await AndroidOpenSettings.displaySettings()
 
 // Open security settings menu
-AndroidOpenSettings.securitySettings()
+await AndroidOpenSettings.securitySettings()
 
 // Open internal storage settings menu
-AndroidOpenSettings.internalStorageSettings()
+await AndroidOpenSettings.internalStorageSettings()
 
 // Open memory card settings menu
-AndroidOpenSettings.memoryCardSettings()
+await AndroidOpenSettings.memoryCardSettings()
 
 // Open accessibility settings menu
-AndroidOpenSettings.accessibilitySettings()
+await AndroidOpenSettings.accessibilitySettings()
 
 // Open application settings menu
-AndroidOpenSettings.applicationSettings()
+await AndroidOpenSettings.applicationSettings()
 
 // Open device info settings menu
-AndroidOpenSettings.deviceInfoSettings()
+await AndroidOpenSettings.deviceInfoSettings()
 
 // Open application notification settings menu
-AndroidOpenSettings.appNotificationSettings()
+await AndroidOpenSettings.appNotificationSettings()
 ```
