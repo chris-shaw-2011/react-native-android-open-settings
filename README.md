@@ -14,6 +14,60 @@ Using yarn
 yarn add react-native-android-open-settings-async
 ```
 
+## Example
+An example of not allowing a user to use your app unless they have granted GPS access
+
+```javascript
+import React, { Component } from 'react';
+import { PermissionsAndroid, Platform, Alert, View, Text } from 'react-native';
+import AndroidOpenSettings from 'react-native-android-open-settings-async'
+
+class App extends Component {
+    async componentDidMount() {
+        if (Platform.OS == "android") {
+            const title = "Location Permission Required";
+            const message = "In order to use this app you must grant location access";
+            const permission = "android.permission.ACCESS_FINE_LOCATION";
+
+            while (!(await PermissionsAndroid.check(permission))) {
+                var permissionResponse = await PermissionsAndroid.request(permission, {
+                    title: title,
+                    message: message,
+                    buttonPositive: "Ok"
+                });
+
+                if (permissionResponse == "granted") {
+                    break;
+                }
+                else if (permissionResponse == "never_ask_again") {
+                    await new Promise((resolve) => {
+                        const alertButtons = [{
+                            text: "Open Settings",
+                            onPress: () => {
+                                AndroidOpenSettings.appDetailsSettings().then(() => {
+                                    resolve("yes")
+                                })
+                            },
+                        }]
+                        Alert.alert(title, message, alertButtons,
+                            {
+                                cancelable: false,
+                                onDismiss: () => resolve("yes")
+                            })
+                    })
+                }
+            }
+        }
+
+        //Continue with component did mount, you have permission now
+    }
+
+    render() {
+        return <View><Text>You now have permission (this won't render unless you do)</Text></View>
+    }
+}
+```
+
 ## Usage
 
 ```javascript
